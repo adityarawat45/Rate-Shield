@@ -9,7 +9,7 @@ interface Props {
 
 const RulesTable: React.FC<Props> = ({ openAddOrUpdateRuleDialog, rulesData }) => {
     return (
-        <div className="px-8 py-8">
+        <div className="hidden lg:block px-8 py-8">
             <table className="table-auto w-full text-left">
                 <thead>
                     <tr>
