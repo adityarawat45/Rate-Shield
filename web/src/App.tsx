@@ -1,7 +1,10 @@
+import { RecoilRoot } from "recoil"
 import Dashboard from "./components/Dashboard"
 
 function App() {
-    return (<Dashboard />)
+    return (
+        <RecoilRoot><Dashboard /></RecoilRoot>
+)
 }
 
 export default App

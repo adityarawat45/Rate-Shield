@@ -6,6 +6,9 @@ import logo from './../assets/logo.svg'
 import { IoSearch } from "react-icons/io5";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { FaXmark } from "react-icons/fa6";
+import { useRecoilState } from "recoil";
+import { drawerState, selectedPageState } from "../recoil/atom";
+import Sidebar from "./SideBar";
 
 
 interface Props {
@@ -16,6 +19,8 @@ interface Props {
 const APIConfigurationHeader: React.FC<Props> = ({ openAddOrUpdateRuleDialog, setSearchRuleText }) => {
     const [searchedText, setSearchedText] = useState('');
     const [showSearch, setShowSearch] = useState(true);
+    const [showDrawer, setShowDrawer] = useRecoilState(drawerState);
+    const [selectedPage, setSelectedPage] = useRecoilState(selectedPageState);
 
     const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -25,6 +30,9 @@ const APIConfigurationHeader: React.FC<Props> = ({ openAddOrUpdateRuleDialog, se
 
     const toggleSearchButton = () => {
         setShowSearch(!showSearch)
+    }
+    const toggleDrawer =() => {
+        setShowDrawer(!showDrawer)
     }
     
     return (
@@ -55,9 +63,18 @@ const APIConfigurationHeader: React.FC<Props> = ({ openAddOrUpdateRuleDialog, se
                 </button>
             </div>
             {/* small device */}
+
             <div className="flex-col lg:hidden"> 
+                            {/* Sidebar for small devices */}
+            {showDrawer ? (
+                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 z-50">
+                <div className="w-64 h-full bg-white shadow-lg">
+                    <Sidebar onSelectPage={setSelectedPage} />
+                </div>
+                </div>
+               ) : null}
                <nav className="bg-black w-screen p-3 justify-between items-center flex">
-                <HiMiniBars3  color="white" size={24}/>
+                  <div onClick={toggleDrawer}><HiMiniBars3 color="white" size={24}/></div>
                   <img src={logo} />
                   <div onClick={toggleSearchButton}>
                      {showSearch ? (
