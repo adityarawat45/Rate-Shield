@@ -84,7 +84,7 @@ const APIConfigurationHeader: React.FC<Props> = ({ openAddOrUpdateRuleDialog, se
                      )}
                   </div>
                </nav>
-                   {showSearch ? (<div className="flex justify-center items-center"> 
+                   {!showSearch ? (<div className="flex justify-center items-center"> 
                     <input
                        className="bg-gray-200 p-3 py-2 m-3 rounded-sm w-full outline outline-none text-sm focus:outline-gray-400 focus:outline-1"
                         placeholder="Enter api endpoint to search"
